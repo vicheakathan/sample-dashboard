@@ -1,0 +1,97 @@
+﻿@using System.Web
+@using Microsoft.AspNetCore.Http.Extensions
+@model IEnumerable<Dashboard.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+    ViewData["Header"] = "Products";
+}
+
+
+
+<div style="padding-bottom:20px">
+    <button class="btn btn-primary tk_button_a">
+        <a asp-action="Create">Create New</a>
+    </button>
+</div>
+
+@if(TempData["AlertMessage"] != null)
+{
+    @*<div class="alert alert-success">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>*@
+    <button class="btn btn-primary" style="display:none" id="btn_alert_success" onclick="toastr.success('@TempData["AlertMessage"]', 'Success!');">Launch</button>
+}
+
+<div class="row mt5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="float-right" style="float: right!important;">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="search" value="@ViewBag.keysearch">
+                            <div class="input-group-btn">
+                            <button class="btn btn-secondary"><i class="ion ion-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <h4>List Product</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th class="text-center">
+                            <div class="custom-checkbox custom-control">
+                                <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
+                                <label for="checkbox-all" class="custom-control-label"></label>
+                            </div>
+                            </th>
+                            <th>Image</th>
+                            <th>Barcode</th>
+                            <th>Category</th>
+                            <th>Name</th>
+                            <th>Cost</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach (var item in Model) {
+                            <tr>
+                                <td width="40" class="align-middle text-center">
+                                    <div class="custom-checkbox custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-@item.id">
+                                        <label for="checkbox-@item.id" class="custom-control-label"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    @{
+                                        var path = $@"wwwroot\uploads\images\" + item.image;
+                                        var fileName = "no_image.png";
+                                        FileInfo file = new FileInfo(path);
+                                        if (file.Exists.Equals(true))
+                                        {
+                                            fileName = item.image;
+                                        }
+                                    }
+                                    <img src="~/uploads/images/@fileName" class="show_image" width="50" height="50" data-toggle="title" style="padding: 3px;border: 1px solid #d7d0d0;border-radius: 5px;">
+                                </td>
+                                <td class="align-middle">@Html.DisplayFor(modelItem => item.barcode)</td>
+                                <td class="align-middle">@Html.DisplayFor(modelItem => item.category_.name)</td>
+                                <td class="align-middle">@Html.DisplayFor(modelItem => item.name)</td>
+                                <td class="align-middle">@String.Format("{0:C}", item.cost)</td>
+                                <td class="align-middle">@String.Format("{0:C}", item.price)</td>
+                                <td class="align-middle">
+                                    <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" data-original-title="Edit" asp-action="Edit" asp-route-id="@item.id"><i class="ion ion-edit"></i></a>
+                                    <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Details" data-original-title="Details" asp-action="Details" asp-route-id="@item.id"><i class="ion-ios-information-outline"></i></a>
+                                    <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete" asp-action="Delete" asp-route-id="@item.id"><i class="ion ion-trash-b"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

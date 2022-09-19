@@ -1,0 +1,85 @@
+﻿<ejs-sidebar id="default-sidebar" mediaQuery="(min-width: 600px)" width="280px">
+    <e-content-template>
+        @*<div class="title"> Sidebar content</div>*@
+        <div class="main-sidebar">
+                <span class="tk_close_sidebar" id="close"><i class="ion-close-round"></i></span>
+                <aside id="sidebar-wrapper">
+                <div class="sidebar-brand" style="height:auto;">
+                    <a href="~/" style="text-decoration: none;"><img src="https://horrorandhalloween.com/wp-content/uploads/2021/09/sample-logo-470x235-1.png" width="200"/></a>
+                </div>
+                <div class="sidebar-user" style="display:none">
+                    <div class="sidebar-user-picture">
+                    <img alt="image" src="css/dist/img/avatar/avatar-1.jpeg">
+                    </div>
+                    <div class="sidebar-user-details">
+                    <div class="user-name">Ujang Maman</div>
+                    <div class="user-role">
+                        Administrator
+                    </div>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu-item" id="dashboard">
+                        <a href="~/"  runat="server"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+                    </li>
+                    <li class="sidebar-menu-item" id="products">
+                        <a href="~/Products"  runat="server"><i class="fa fa-barcode" aria-hidden="true"></i><span>Products</span></a>
+                    </li>
+                    <li class="sidebar-menu-item" id="sales">
+                        <a href="~/Sales" runat="server"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Sales</span></a>
+                    </li>
+                    <li class="sidebar-menu-item" id="expense">
+                        <a href="~/Expenses" runat="server"><i class="fa-solid fa-money-bill-1"></i><span>Expense</span></a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="javascript:void(0);" data-toggl="collapse" data-target="#people" class="has-dropdown"  onclick="
+                            var postData = {
+                                field_id : 'people'
+                            };
+                            OnToggleMenu(postData);"
+                        >
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span>People</span>
+                        </a>
+                        <div class="collapse" id="collapse_people">
+                            <div class="sidebar-menu-dropdown">
+                                <ul class="dropdown-menu-item">
+                                    <li class="" id="company">
+                                        <a href="~/Companies"><i class="fas fa-building" aria-hidden="true" style="margin-left:0px;"></i><span>Company</span></a>
+                                    </li>
+                                    <li class="" id="user">
+                                        <a href="~/Users"><i class="fa fa-user" aria-hidden="true"></i><span>User</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0);" class="has-dropdown" data-toggl="collapse" data-target="#collapse_setting" 
+                            onclick="
+                                var postData = {
+                                    field_id : 'setting'
+                                };
+                            OnToggleMenu(postData);"
+                        >
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                            <span>Setting</span>
+                        </a>
+                        <div class="collapse" id="collapse_setting">
+                            <div class="sidebar-menu-dropdown">
+                                <ul class="dropdown-menu-item">
+                                    <li class="" id="cateogry">
+                                        <a href="~/Categories"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Category</span></a>
+                                    </li>
+                                    <li class="" id="department">
+                                        <a href="~/Departments"><i class="fas fa-landmark" aria-hidden="true" style="margin-left:0px;"></i><span>Department</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </aside>
+            </div>
+    </e-content-template>
+</ejs-sidebar>

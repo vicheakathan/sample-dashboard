@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Dashboard.Models.Expense>
+
+@{
+    ViewData["Title"] = "Expenses";
+    ViewData["Header"] = "Expenses";
+}
+
+<div style="padding-bottom:20px">
+    <button class="btn btn-primary tk_button_a">
+        <a asp-action="Create">Create New</a>
+    </button>
+</div>
+
+
+<div class="row mt5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="float-right" style="float: right!important;">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <div class="input-group-btn">
+                            <button class="btn btn-secondary"><i class="ion ion-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <h4>List Expenses</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th class="text-center">
+                            <div class="custom-checkbox custom-control">
+                                <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
+                                <label for="checkbox-all" class="custom-control-label"></label>
+                            </div>
+                            </th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach (var item in Model) {
+                            <tr>
+                                <td width="40" class="align-middle text-center">
+                                    <div class="custom-checkbox custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-@item.id">
+                                        <label for="checkbox-@item.id" class="custom-control-label"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle">@Html.DisplayFor(modelItem => item.date)</td>
+                                <td class="align-middle">@Html.DisplayFor(modelItem => item.category_.name)</td>
+                                <td class="align-middle">@String.Format("{0:C}", item.amount)</td>
+                                <td class="align-middle">@Html.DisplayFor(modelItem => item.description)</td>
+                                <td class="align-middle">
+                                    <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" data-original-title="Edit" asp-action="Edit" asp-route-id="@item.id"><i class="ion ion-edit"></i></a>
+                                    <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Details" data-original-title="Details" asp-action="Details" asp-route-id="@item.id"><i class="ion-ios-information-outline"></i></a>
+                                    <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete" asp-action="Delete" asp-route-id="@item.id"><i class="ion ion-trash-b"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

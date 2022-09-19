@@ -1,0 +1,126 @@
+﻿@using System.Security.Claims 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sample</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Sample.styles.css" asp-append-version="true" />
+
+    @* dashboard css *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.2.43/material.css" />
+    <script src="https://cdn.syncfusion.com/ej2/20.2.43/dist/ej2.min.js"></script>
+    <link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dist/modules/ionicons/css/ionicons.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dist/modules/toastr/build/toastr.min.css">
+    <link rel="icon" type="image/x-icon" href="https://icon-library.com/images/gamer-icon-png/gamer-icon-png-2.jpg">
+</head>
+<body>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="container mt5">
+            <div class="row">
+                <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                    <div class="login-brand" style="margin:0px">
+                        @*<h2><a href="~/" style="text-decoration: none;">Sample</a></h2>*@
+                        <a href="~/" style="text-decoration: none;"><img src="https://horrorandhalloween.com/wp-content/uploads/2021/09/sample-logo-470x235-1.png" width="200"/></a>
+                    </div>
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <partial name="_SideBar" />
+        <header>
+            <nav style="display:none" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sample</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="main-container" id="main-container">
+            <div class="container">
+                <div class="navbar-bg"></div>
+                <nav class="navbar navbar-expand-lg main-navbar tk_navbar" style="">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" id="toggle" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+                    </ul>
+                    <ul class="navbar-nav navbar-right">
+                        <li>
+                            <img alt="image" src="~/css/dist/img/avatar/avatar-5.jpeg" class="rounded-circle" width="35" data-toggle="title" title="Wildan Ahdian" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@User.Identity?.Name</a>
+                            <div class="dropdown-menu" style="">
+                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" style="">Profile</a>
+                                @*<a href="#" class="dropdown-item" style="color:#868e96">Logout</a>*@
+                                <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "", new { area = "" })">
+                                    <button  type="submit" class="dropdown-item" style="font-size:14px">Logout</button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="container mt5">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <main role="main" class="pb-3">
+                            <section class="section">
+                                <h1 class="section-header">
+                                    <div>@ViewData["Header"]</div>
+                                </h1>
+                                @if(TempData["AlertMessageSuccess"] != null)
+                                {
+                                    <button class="btn btn-primary" style="display:none" id="btn_alert_success" onclick="toastr.success('@TempData["AlertMessageSuccess"]', 'Success!');">Launch</button>
+                                }
+                                @if(TempData["AlertMessageError"] != null)
+                                {
+                                    <button class="btn btn-primary" style="display:none" id="btn_alert_error" onclick="toastr.error('@TempData["AlertMessageError"]', 'Error!');">Launch</button>
+                                }
+                                @RenderBody()
+                            </section>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - Sample - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/css/dist/modules/toastr/build/toastr.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <ejs-scripts></ejs-scripts>
+</body>
+</html>

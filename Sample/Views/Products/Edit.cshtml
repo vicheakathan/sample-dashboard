@@ -1,0 +1,85 @@
+﻿@model Dashboard.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    ViewData["Header"] = "Products - Edit";
+}
+
+<hr />
+
+
+<div class="row mt5" style="margin-top:2rem !important">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><a asp-action="Index">Back to List</a></h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <div class="form-group">
+                        <label asp-for="barcode" class="control-label">Barcode</label>
+                        <input asp-for="barcode" class="form-control" />
+                        <span asp-validation-for="barcode" class="text-danger"></span>
+                    </div> 
+                    <div class="form-group">
+                        <label asp-for="category_id" class="control-label">Category</label>
+                        <select asp-for="category_id" class ="form-control" asp-items="ViewBag.category_id"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="name" class="control-label">Name</label>
+                        <input asp-for="name" class="form-control" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="cost" class="control-label">Cost</label>
+                        <input asp-for="cost" class="form-control" />
+                        <span asp-validation-for="cost" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="price" class="control-label">Price</label>
+                        <input asp-for="price" class="form-control" />
+                        <span asp-validation-for="price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                         <label asp-for="image" class="control-label">Product Images Gallery</label>
+                        <br />
+                        <div style="border: 1px solid #d7d0d0;padding: 10px;margin-bottom: 15px;">
+                            @{
+                                var path = $@"wwwroot\uploads\images\" + Model.image;
+                                var fileName = "no_image.png";
+                                FileInfo file = new FileInfo(path);
+                                if (file.Exists.Equals(true))
+                                {
+                                    fileName = Model.image;
+                                }
+                            }
+                            <img src="~/uploads/images/@fileName" class="rounded-circle1" height="200" data-toggle="title" style="box-shadow: 1px 1px 5px 0px #a2958a;border-radius:5px">
+                            <br />
+                            <input type="file" id="EditProductFile" class="form-control" name="myfile" style="margin-top:15px" onchange="
+                                var postData = {
+                                    FileImage : 'EditProductFile',
+                                    FileImageError : 'EditProductImageError',
+                                    FileImageHidden : 'EditProductImageHidden'
+                                };
+                                APIUploadImage(postData);"
+                            />  
+                            <input type="hidden" asp-for="image" class="form-control" id="EditProductImageHidden" />
+                            <span asp-validation-for="image" class="text-danger"></span>
+                            <span id="EditProductImageError" style="color: rgb(220,53,69);"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
