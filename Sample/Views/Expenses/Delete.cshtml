@@ -1,0 +1,56 @@
+﻿@model Dashboard.Models.Expense
+
+@{
+    ViewData["Title"] = "Delete";
+    ViewData["Header"] = "Expenses - Delete";
+}
+
+<hr>
+
+<div class="row mt5" style="margin-top:2rem;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div style="float:right !important;"><h4>Are you sure you want to delete this?</h4></div>
+                <h4><a asp-action="Index">Back to List</a></h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.amount)*@
+                        Date
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.date)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.date)*@
+                        Category
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.category_.name)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.description)*@
+                        Amount
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @*@Html.DisplayFor(model => model.amount)*@
+                        @String.Format("{0:C}", Model.amount)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.category_)*@
+                        Description
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
+                </dl>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

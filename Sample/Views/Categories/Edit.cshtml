@@ -1,0 +1,36 @@
+﻿@model Dashboard.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+    ViewData["Header"] = "Category - Edit";
+}
+
+<hr />
+
+<div class="row mt5" style="margin-top:2rem;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><a asp-action="Index">Back to List</a></h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <div class="form-group">
+                        <label asp-for="name" class="control-label"></label>
+                        <input asp-for="name" class="form-control" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

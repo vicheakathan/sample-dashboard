@@ -1,0 +1,56 @@
+﻿@model Dashboard.Models.Expense
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData["Header"] = "Expenses - Details";
+}
+
+
+
+<hr />
+
+<div class="row mt5" style="margin-top:2rem;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><a asp-action="Index">Back to List</a></h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.amount)*@
+                        Date
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.date)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.date)*@
+                        Category
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.category_.name)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.description)*@
+                        Amount
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @*@Html.DisplayFor(model => model.amount)*@
+                        @String.Format("{0:C}", Model.amount)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @*@Html.DisplayNameFor(model => model.category_)*@
+                        Description
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
+                </dl>
+                <button class="btn btn-primary tk_button_a">
+                    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

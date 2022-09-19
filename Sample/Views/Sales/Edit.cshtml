@@ -1,0 +1,109 @@
+﻿@model Dashboard.Models.Sale
+
+@{
+    ViewData["Title"] = "Edit";
+    ViewData["Header"] = "Sale - Edit";
+}
+
+
+<hr />
+
+<div class="row mt5" style="margin-top:2rem;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><a asp-action="Index">Back to List</a></h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="id" />
+                    <div class="form-group">
+                        <label asp-for="date" class="control-label">Date</label>
+                        <input asp-for="date" class="form-control" />
+                        <span asp-validation-for="date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="reference_no" class="control-label">Reference No</label>
+                        <input asp-for="reference_no" class="form-control" readonly />
+                        <span asp-validation-for="reference_no" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="customer_id" class="control-label">Customer</label>
+                        <select asp-for="customer_id" class="form-control" asp-items="ViewBag.customer_id"></select>
+                        <span asp-validation-for="customer_id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="biller_id" class="control-label">Biller</label>
+                        <select asp-for="biller_id" class="form-control" asp-items="ViewBag.biller_id"></select>
+                        <span asp-validation-for="biller_id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="sale_status" class="control-label">Sale Status</label>
+                        @* <input asp-for="sale_status" class="form-control" /> *@
+                        <select asp-for="sale_status" class="form-control">
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                        <span asp-validation-for="sale_status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="payment_status" class="control-label">Payment Status</label>
+                        @* <input asp-for="payment_status" class="form-control" /> *@
+                        <select asp-for="payment_status" class="form-control">
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="ar">AR</option>
+                        </select>
+                        <span asp-validation-for="payment_status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="payment_method" class="control-label">Payment Method</label>
+                        @* <input asp-for="payment_method" class="form-control" /> *@
+                        <select asp-for="payment_method" class="form-control">
+                            <option value="cash">Cash</option>
+                            <option value="pending">Pending</option>
+                            <option value="aba">ABA</option>
+                        </select>
+                        <span asp-validation-for="payment_method" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="total" class="control-label">Total</label>
+                        <input asp-for="total" class="form-control" />
+                        <span asp-validation-for="total" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="discount" class="control-label">Discount</label>
+                        <input asp-for="discount" class="form-control" />
+                        <span asp-validation-for="discount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="shipping" class="control-label">Shipping</label>
+                        <input asp-for="shipping" class="form-control" />
+                        <span asp-validation-for="shipping" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="grand_total" class="control-label">Grand Total</label>
+                        <input asp-for="grand_total" class="form-control" />
+                        <span asp-validation-for="grand_total" class="text-danger"></span>
+                    </div>
+                    
+                    
+                
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @* <a asp-action="Index">Back to List</a> *@
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

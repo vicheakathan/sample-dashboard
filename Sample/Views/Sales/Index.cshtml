@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Dashboard.Models.Sale>
+
+@{
+    ViewData["Title"] = "Sale";
+    ViewData["Header"] = "Sale";
+}
+
+
+@*<div style="padding-bottom:20px">
+    <button class="btn btn-primary tk_button_a">
+        <a asp-action="Create">Create New</a>
+    </button>
+</div>*@
+
+
+<div class="row mt5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <nav class="navbar navbar-expand-lg main-navbar tk_navbar" style="height:40px">
+                    <ul class="navbar-nav mr-3">
+                        <li>
+                            <h4>List Sale</h4>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-right" style="align-items: center;">
+                        <li>
+                            <form>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="search" value="@ViewBag.keysearch">
+                                    <div class="input-group-btn">
+                                    <button class="btn btn-secondary"><i class="ion ion-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fa fa-tasks" data-placement="left" title="Actions" data-original-title="Actions"></i>
+                            </a>
+                            <div class="dropdown-menu action_dropdown_menu" style="">
+                                <a class="dropdown-item" asp-action="Create">
+                                    <i class="fa fa-plus-circle"></i>
+                                    <span style="padding-left: 15px;">Add New</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" style="color:#868e96" onclick="API_Bulk_Actions('export_to_excel');">
+                                    <i class="fa-solid fa-file-excel"></i>
+                                    <span style="padding-left: 15px;">Export to Excel</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" style="color:#868e96" onclick="API_Bulk_Actions('export_to_pdf');">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                    <span style="padding-left: 15px;">Export to PDF</span>
+                                </a>
+                                <a href="javascript:void(0);" class="dropdown-item" style="color:#868e96" onclick="API_Bulk_Actions('delete');">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <span style="padding-left: 15px;">Delete</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th class="text-center align-middle">
+                            <div class="custom-checkbox custom-control" style="display:flex;justify-content:center">
+                                <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input temp_checkbox_all" name="check_all" id="checkbox-all" onclick="api_checkbox_all(this,'val[]');api_get_checkbox_value('val[]', 'check_value','sales');">
+                                <label for="checkbox-all" class="custom-control-label"></label>
+                            </div>
+                            </th>
+                            <th class="align-middle">Date</th>
+                            <th class="align-middle">Reference No</th>
+                            <th class="align-middle">Customer</th>
+                            <th class="align-middle">Sale Status</th>
+                            <th class="align-middle">Grand Total</th>
+                            <th class="align-middle">Payment Status</th>
+                            <th class="align-middle">Paid By</th>
+                            <th class="align-middle">Action</th>
+                        </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td width="40" class="align-middle text-center">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input temp_checkbox" id="checkbox-@item.id" name="val[]" value="@item.id" onclick="api_get_checkbox_value('val[]', 'check_value', 'sales');">
+                                            <label for="checkbox-@item.id" class="custom-control-label"></label>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">@Html.DisplayFor(modelItem => item.date)</td>
+                                    <td class="align-middle">@Html.DisplayFor(modelItem => item.reference_no)</td>
+                                    <td class="align-middle">@Html.DisplayFor(modelItem => item.customer_.name)</td>
+                                    <td class="align-middle">
+                                        @if (item.sale_status == "completed")
+                                        {
+                                            <div class="badge badge-success">Completed</div>
+                                        }
+                                        @if (item.sale_status == "pending")
+                                        {
+                                            <div class="badge badge-warning">Pending</div>
+                                        }
+                                    </td>
+                                    <td class="align-middle">@String.Format("{0:C}", item.grand_total)</td>
+                                    <td class="align-middle">
+                                        @if (item.payment_status == "paid")
+                                        {
+                                            <div class="badge badge-success">Paid</div>
+                                        }
+                                        @if (item.payment_status == "pending")
+                                        {
+                                            <div class="badge badge-warning">Pending</div>
+                                        }
+                                        @if (item.payment_status == "ar")
+                                        {
+                                            <div class="badge badge-info">AR</div>
+                                        }
+                                    </td>
+                                    <td class="align-middle">
+                                        @if (item.payment_method == "aba")
+                                        {
+                                            <div class="badge badge-aba">ABA</div>
+                                        }
+                                        @if (item.payment_method == "cash")
+                                        {
+                                            <div class="badge badge-cash">Cash</div>
+                                        }
+                                        @if (item.payment_method == "pending")
+                                        {
+                                            <div class="badge badge-pending">Pending</div>
+                                        }
+                                    </td>
+                                    <td class="align-middle">
+                                        <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" data-original-title="Edit" asp-action="Edit" asp-route-id="@item.id"><i class="ion ion-edit"></i></a>
+                                        <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Details" data-original-title="Details" asp-action="Details" asp-route-id="@item.id"><i class="ion-ios-information-outline"></i></a>
+                                        <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete" asp-action="Delete" asp-route-id="@item.id"><i class="fa-solid fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <div class="" style="display:none">
+                    <input type="text" name="check_value" value="" id="check_value"/>
+                    <input type="text" name="api_action" value="" id="api_action"/>
+                    <input type="text" name="key_action" value="" id="key_action"/>
+                    <button type="button" onclick="document.api_form_action.submit();" value="ok">ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    
+</script>

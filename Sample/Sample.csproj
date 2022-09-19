@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c1f9ac93-8208-4e21-8fdb-a9fff38440b0</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.96.0" />
+    <PackageReference Include="EPPlus" Version="6.0.7" />
+    <PackageReference Include="Grpc.Core" Version="2.46.3" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="itextsharp.xmlworker" Version="5.5.13.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
+    <PackageReference Include="Microsoft.Azure.ActiveDirectory.GraphClient" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1537.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.17.1" />
+    <PackageReference Include="PDFsharp" Version="1.50.5147" />
+    <PackageReference Include="Syncfusion.Pdf.AspNet" Version="20.2.0.48" />
+    <PackageReference Include="Syncfusion.Pdf.AspNet.Mvc5" Version="20.2.0.48" />
+    <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="20.2.0.48" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\win\native\snappy32.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\win\native\snappy64.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\osx\native\libsnappy64.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\linux\native\libsnappy64.so" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\win\native\libzstd.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\osx\native\libzstd.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\linux\native\libzstd.so" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\osx\native\libsnappy64.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\osx\native\libsnappy64.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\osx\native\libsnappy64.dylib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\win\native\snappy32.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\ATECH\.nuget\packages\mongodb.driver.core\2.17.1\build\..\runtimes\linux\native\libzstd.so" />
+  </ItemGroup>
+
+</Project>
